@@ -17,7 +17,7 @@ public class VictoryScreen : MonoBehaviour
         HighestScoreText.text = "Skor Tertinggi: " + Stats.HighestCount.ToString();
         GameObject.Find("Player").SetActive(false);
         
-        transform.GetChild(3).gameObject.SetActive(true); // Activates Child 3, the victory stinger
+        transform.GetChild(3).gameObject.SetActive(true);
     }
 
     public void RestartButton()

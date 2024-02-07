@@ -8,7 +8,6 @@ public class ActionSoundManager : MonoBehaviour
 
     static AudioSource AudioSrc;
 
-    // Start is called before the first frame update
     void Start()
     {
         PlayerDeathSound = Resources.Load<AudioClip>("death-sound2");

@@ -24,7 +24,6 @@ public class SpawnObjects : MonoBehaviour
         SpawnEnemies();
         GeneratePlastic(MaxPlastic);
 
-        // Repeatedly generate food objects at Speed 
         InvokeRepeating("GenerateFood", 0, SpawnRate);
     }
 
@@ -101,7 +100,6 @@ public class SpawnObjects : MonoBehaviour
 
     Vector3 GetLocation(GameObject R)
     {
-        // Get Diamond icon in the room. This could be an empty game object instead
         Vector3 RCenter = R.transform.GetChild(0).position;
 
         float SpawnX = Random.Range(RCenter.x-10, RCenter.x+10);

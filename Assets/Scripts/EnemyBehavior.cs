@@ -22,7 +22,6 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update() 
     {
-        // Tilemaps are set to Layer Solid, which makes Collision True if enemy hits a Solid layer
         Collision = Physics2D.Linecast(SightStart.position, SightEnd.position, 1 << LayerMask.NameToLayer("Solid"));
 
         if (Collision) 

@@ -36,17 +36,14 @@ public class LevelGeneration : MonoBehaviour
 
     void CreateRooms()
     {
-        // Keeps track of all the information we need to know about where our rooms are
         InstantiatedRooms = new GameObject[GridSizeX * 2, GridSizeY * 2];
         Rooms = new Room[GridSizeX * 2, GridSizeY * 2];
         Rooms[GridSizeX, GridSizeY] = new Room(Vector2.zero, 1);
         TakenPositions.Insert(0, Vector2.zero);
         Vector2 CheckPos = Vector2.zero;
 
-        // Magic Numbers for random generation
         float RandomCompare = 0.2f, RandomCompareStart = 0.2f, RandomCompareEnd = 0.01f;
     
-        // Creates 2D array of Rooms according to randomly decided adjacent locations
         for (int i = 0; i < NumRooms-1; i++)
         {
             float RandomPerc = ((float) i / ((float) NumRooms-1));
@@ -56,7 +53,6 @@ public class LevelGeneration : MonoBehaviour
                 RandomCompare = Mathf.Lerp(RandomCompareStart, RandomCompareEnd, RandomPerc);
                 CheckPos = FindNewValidRoomPos();
 
-                // If a room already has multiple neighbors, it's less likely to gain another one
                 if (NumberOfNeighbors(CheckPos, TakenPositions) > 1 && UnityEngine.Random.value > RandomCompare)
                 {
                     int Iterations = 0;
@@ -66,9 +62,6 @@ public class LevelGeneration : MonoBehaviour
                         CheckPos = FindNewValidRoomPos();
                         Iterations++;
                     }
-
-                    //if (Iterations >= 50)
-                        //Debug.LogError("Error: Could not create with fewer neighbors than: " + NumberOfNeighbors(CheckPos, TakenPositions));            
                 }
             }
             else
@@ -76,7 +69,6 @@ public class LevelGeneration : MonoBehaviour
                 CheckPos = new Vector2(GetDeepestRoom().x, GetDeepestRoom().y - 1);
             }
  
-            // Add created room to arrays
             Rooms[(int)CheckPos.x + GridSizeX, (int)CheckPos.y + GridSizeY] = new Room(CheckPos, 0);
             TakenPositions.Insert(0, CheckPos);
         }
@@ -131,7 +123,6 @@ public class LevelGeneration : MonoBehaviour
         return NumNeighbors;
     }
 
-    // Checks if a room has a neighbor, then sets the door boolean to enable a door between rooms
     void SetRoomDoors()
     {
         for (int x = 0; x < (GridSizeX * 2); x++)
@@ -174,23 +165,7 @@ public class LevelGeneration : MonoBehaviour
         {
             if (R == null)
                 continue;
-            
-            // Instantiates the Sprites. This does nothing right now, but can be used to make a minimap
-            /*
-            Vector2 DrawPos = R.GridPos;
-            DrawPos.x *= MapRoomGap/10;
-            DrawPos.y *= MapRoomGap/20;
-            GameObject MapSpriteObj = Object.Instantiate(MapSprite, DrawPos, Quaternion.identity);
-            MapSpriteObj.SetActive(true);
-            MapSpriteSelector Mapper = MapSpriteObj.GetComponent<MapSpriteSelector>();
-            Mapper.Type = R.Type;
-            Mapper.Up = R.DoorTop;
-            Mapper.Down = R.DoorBot;
-            Mapper.Right = R.DoorRight;
-            Mapper.Left = R.DoorLeft;
-            */
 
-            // Creates room objects and adds them to the array of Instantiated Rooms
             Vector2 DrawPos = R.GridPos;
             DrawPos.x *= RoomGapX/100;
             DrawPos.y *= RoomGapY/100;
@@ -213,7 +188,6 @@ public class LevelGeneration : MonoBehaviour
             index = ExtensionMethods.CoordinatesOf<Room>(Rooms, R);
             GameObject CurrentRoom = InstantiatedRooms[(int)index.x, (int)index.y];
 
-            // Deletes corresponding door of room
             if (R.DoorBot)
                 Destroy(CurrentRoom.transform.GetChild(1).Find("BotDoorGrid").gameObject);
             if (R.DoorTop)

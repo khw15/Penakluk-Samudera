@@ -135,7 +135,6 @@ public class RoomGeneration : MonoBehaviour
         }        
     }
 
-    // Deletes center of rect passed
     void ClearRectCenter(Rect _Rect, Tilemap _TMap)
     {
         for (int x = _Rect.XOffset; x < (_Rect.Width + _Rect.XOffset); x++)
@@ -148,7 +147,6 @@ public class RoomGeneration : MonoBehaviour
         }
     }
 
-    // Deletes in a range outside of rect passed
     void ClearRectOutside(Rect _Rect, int Radius, Tilemap _TMap)
     {
         for (int x = _Rect.XOffset - Radius; x < (_Rect.Width + _Rect.XOffset + Radius); x++)

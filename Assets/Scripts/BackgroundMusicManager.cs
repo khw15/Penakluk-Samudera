@@ -11,7 +11,6 @@ public class BackgroundMusicManager : MonoBehaviour
     Image SoundOffIcon;
     private bool Muted = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (!PlayerPrefs.HasKey("Senyap"))

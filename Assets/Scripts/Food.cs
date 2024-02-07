@@ -11,7 +11,7 @@ public class Food : MonoBehaviour
         SpawnObs = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpawnObjects>();
     }
     
-    private void OnTriggerEnter2D(Collider2D Col)        // This method is called whenever a collision is detected, and passes the Component which Food collided with
+    private void OnTriggerEnter2D(Collider2D Col)
     {
         if (Col.gameObject.tag == "Player" || Col.gameObject.tag == "Enemy")
         {

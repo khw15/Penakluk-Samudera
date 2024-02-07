@@ -6,7 +6,6 @@ public class SkinTakesDamage : MonoBehaviour
 {
     public SpriteRenderer SkinSprite;
 
-    // Start is called before the first frame update
     void Start()
     {
         SkinSprite = GetComponent<SpriteRenderer>();

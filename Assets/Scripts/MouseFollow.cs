@@ -54,7 +54,6 @@ public class MouseFollow : MonoBehaviour
         return Speed * SpeedRatio;
     }
 
-    // Gets ratio of mousepos:screenheight, where 0 is center, 1.0 is max height/width
     private Vector2 GetMouseRatio()
     {
         float YRatio = Math.Abs(2*Input.mousePosition.y/Screen.height - 1);
